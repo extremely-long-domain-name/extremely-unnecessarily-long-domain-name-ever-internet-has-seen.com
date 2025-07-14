@@ -131,7 +131,7 @@
   </div>
 
   <div>
-    <button class="button" onclick="alert('あなたはもう戻れません。')">押すな危険</button>
+    <button class="button" onclick="alert('あなたはもう戻れません。\nYou cannot return.')">押すな危険</button>
     <div class="button-text-en">Do Not Press</div>
   </div>
 
@@ -142,6 +142,7 @@
   <script>
     const matrix = document.getElementById('matrix');
     const chars = "アイウエオカキクケコサシスセソタチツテトナニヌネノABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const spans = [];
     for (let i = 0; i < 100; i++) {
       const span = document.createElement('span');
       span.style.left = Math.random() * 100 + 'vw';
@@ -149,7 +150,12 @@
       span.style.animationDuration = (4 + Math.random() * 6) + 's';
       span.textContent = chars[Math.floor(Math.random() * chars.length)];
       matrix.appendChild(span);
+      spans.push(span);
     }
+    // Stop animation after 30 seconds
+    setTimeout(() => {
+      spans.forEach(span => span.remove());
+    }, 30000);
   </script>
 </body>
 </html>

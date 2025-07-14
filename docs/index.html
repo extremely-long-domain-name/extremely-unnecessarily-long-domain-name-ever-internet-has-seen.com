@@ -29,12 +29,29 @@
       height: 100%;
       background: radial-gradient(circle, rgba(0, 255, 204, 0.1) 0%, transparent 70%), repeating-conic-gradient(from 0deg, rgba(0,255,204,0.05) 0deg 10deg, transparent 10deg 20deg);
       animation: warp 10s infinite linear;
-      z-index: -1;
+      z-index: -3;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(transparent 0px 18px, rgba(0,255,0,0.1) 18px 20px);
+      animation: matrix 30s linear infinite;
+      z-index: -2;
+      background-size: 100% 100%;
+      pointer-events: none;
     }
     @keyframes warp {
       0% { transform: scale(1) rotate(0deg); filter: blur(0px); }
       50% { transform: scale(1.2) rotate(180deg); filter: blur(2px); }
       100% { transform: scale(1) rotate(360deg); filter: blur(0px); }
+    }
+    @keyframes matrix {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 100%; }
     }
     h1 {
       font-size: 3rem;
@@ -42,7 +59,7 @@
     }
     h2 {
       font-size: 1.5rem;
-      margin: 0.5rem;
+      margin: 0.25rem;
     }
     .logo {
       font-size: 5rem;
@@ -64,6 +81,10 @@
       cursor: pointer;
       font-size: 1rem;
       animation: pulse 2s infinite;
+    }
+    .button-text-en {
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
     }
     @keyframes pulse {
       0% { transform: scale(1); opacity: 1; }
@@ -88,6 +109,7 @@
   <div class="logo">限</div>
   <h1>Project Extremis (限界ドメイン)</h1>
   <h2>これはネットの果て。あなたは今、戻れない場所にいる。</h2>
+  <h2><em>This is the edge of the internet. There is no way back.</em></h2>
 
   <div class="url">
     URL: <br>
@@ -100,7 +122,10 @@
     </a>
   </div>
 
-  <button class="button" onclick="alert('あなたはもう戻れません。')">押すな危険</button>
+  <div>
+    <button class="button" onclick="alert('あなたはもう戻れません。')">押すな危険</button>
+    <div class="button-text-en">Do Not Press</div>
+  </div>
 
   <footer>
     Powered by <a href="https://cloudflare.com" style="color: #888;">Cloudflare</a> & <a href="https://github.com" style="color: #888;">GitHub Pages</a>

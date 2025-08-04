@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project Extremis (限界ドメイン)</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23000'/><text x='50%' y='60%' dominant-baseline='middle' text-anchor='middle' font-size='50' fill='%23fff'>限</text></svg>">
   <style>
@@ -20,16 +20,17 @@
       text-align: center;
       overflow: hidden;
     }
-    body::before {
-      content: "";
+    #warp-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, rgba(0, 255, 204, 0.1) 0%, transparent 70%), repeating-conic-gradient(from 0deg, rgba(0,255,204,0.05) 0deg 10deg, transparent 10deg 20deg);
+      background: radial-gradient(circle, rgba(0, 255, 204, 0.1) 0%, transparent 70%),
+                  repeating-conic-gradient(from 0deg, rgba(0,255,204,0.05) 0deg 10deg, transparent 10deg 20deg);
       animation: warp 10s infinite linear;
       z-index: -4;
+      transition: opacity 2s ease;
     }
     .matrix {
       position: fixed;
@@ -109,9 +110,17 @@
       font-size: 0.75rem;
       color: #888;
     }
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.1rem; }
+      .logo { width: 80px; height: 80px; font-size: 3rem; }
+      .button { font-size: 0.9rem; padding: 0.8rem; }
+      .url, .email { font-size: 0.7rem; }
+    }
   </style>
 </head>
 <body>
+  <div id="warp-bg"></div>
   <div class="matrix" id="matrix"></div>
 
   <div class="logo">限</div>
@@ -136,7 +145,7 @@
   </div>
 
   <footer>
-    Powered by <a href="https://cloudflare.com" style="color: #888;">Cloudflare</a> / <a href="https://github.com" style="color: #888;">GitHub Pages</a> / <a href="https://improvmx.com" style="color: #888;">ImprovMX</a> / <a href="https://mail.google.com" style="color: #888;">Gmail</a> / <a href="https://script.google.com" style="color: #888;">GAS</a>
+    Powered by <a href="https://cloudflare.com/" style="color: #888;">Cloudflare</a> / <a href="https://github.com/" style="color: #888;">GitHub Pages</a>
   </footer>
 
   <script>
@@ -152,9 +161,15 @@
       matrix.appendChild(span);
       spans.push(span);
     }
-    // Stop animation after 30 seconds
+
+    // Stop animations after 30 seconds
     setTimeout(() => {
       spans.forEach(span => span.remove());
+      const warp = document.getElementById('warp-bg');
+      if (warp) {
+        warp.style.opacity = '0';
+        warp.style.animation = 'none';
+      }
     }, 30000);
   </script>
 </body>
